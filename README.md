@@ -3,7 +3,7 @@
 ## Sources
 
 ### ELK
-https://github.com/stefanprodan/dockprom
+https://github.com/justwatchcom/elasticsearch_exporter 
 
 ### Docker
-https://github.com/justwatchcom/elasticsearch_exporter 
+https://github.com/stefanprodan/dockprom
