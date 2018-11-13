@@ -1,7 +1,7 @@
 elasticsearch_exporter:
     image: justwatch/elasticsearch_exporter
     command:
-     - '-es.uri=URI'
+     - '-es.uri=CHANGE-ME'
      - '-es.all=true'
      - '-es.indices=true'
      - '-es.shards=true'
