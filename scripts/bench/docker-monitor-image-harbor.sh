@@ -27,7 +27,12 @@ if [ -e $TMP ]; then
 fi
 
 NB_IMAGES_DANGLING=`$DOCKER_CMD images -f dangling=true -q | wc -l`
-NB_IMAGES_OTHER=`$DOCKER_CMD ps -a | grep -v "$HARBOR_DOMAIN" | wc -l`
+for i in `$DOCKER_CMD ps -a |  grep -v "$HARBOR_DOMAIN" | awk -F " " '{ print $2 }' | grep -v ID`; do
+	$DOCKER_CMD inspect  --format='{{.RepoDigests}}' $i 2>/dev/null | grep -q "$HARBOR_DOMAIN"
+	if [ "$?" != 0 ]; then
+		NB_IMAGES_OTHER=$((NB_IMAGES_OTHER + 1))
+	fi
+done
 
 USED_IMAGES=`$DOCKER_CMD ps -a --format '{{.Image}}' | grep "$HARBOR_DOMAIN"`
 NB_USED_IMAGES_OBSOLETE=0
